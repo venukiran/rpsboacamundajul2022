@@ -11,14 +11,19 @@ namespace loanprocessapi.Handlers
           
             string userName = externalTask.Variables["UserName"].Value.ToString();
             string password = externalTask.Variables["Password"].Value.ToString();
-          
-            if(userName == null || password == null)
+            Dictionary<string, string> resultVariables = new Dictionary<string, string>(); ;
+
+            
+
+            if (userName == null || password == null)
             {
-                externalTask.Variables["remark"] = "rejected";
+                externalTask.Variables.Add("remark",
+                    new Variable("rejected", VariableType.String));
             }
             if (userName != null || password != null)
             {
-                externalTask.Variables["remark"] = "accepted";
+                externalTask.Variables.Add("remark",
+                  new Variable("accepted", VariableType.String));
             }
 
             return new CompleteResult();

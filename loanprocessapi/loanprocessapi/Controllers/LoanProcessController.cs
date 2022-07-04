@@ -35,15 +35,17 @@ namespace loanprocessapi.Controllers
                 StartProcessInstance processParams;
 
                 //json to string
-               // String message = JsonConvert.SerializeObject(userAccount);
+                // String message = JsonConvert.SerializeObject(userAccount);
                 //string to c# pobject
-              //  UserAccount userAccountObj = JsonConvert.DeserializeObject<UserAccount>(message);
+                //  UserAccount userAccountObj = JsonConvert.DeserializeObject<UserAccount>(message);
 
 
 
                 processParams = new StartProcessInstance()
                     .SetVariable("UserName", "")
                    .SetVariable("Password", "");
+                   
+
               ;
 
 

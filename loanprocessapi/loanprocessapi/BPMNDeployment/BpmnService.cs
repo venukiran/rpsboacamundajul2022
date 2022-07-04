@@ -19,6 +19,10 @@ namespace loanprocessapi.BPMNDeployment
             var bpmnResourceStreamHtml = this.GetType()
                 .Assembly
                 .GetManifestResourceStream("loanprocessapi.Forms.LoginForm.html");
+            var bpmnResourceStreamLoanHtml = this.GetType()
+               .Assembly
+               .GetManifestResourceStream("loanprocessapi.Forms.LoanForm.html");
+
             try
             {
                 await camunda.Deployments.Create(
@@ -28,7 +32,8 @@ namespace loanprocessapi.BPMNDeployment
                     null,
                     null,
                     new ResourceDataContent(bpmnResourceStream, "loanprocess.bpmn"),
-                    new ResourceDataContent(bpmnResourceStreamHtml, "LoginForm.html")
+                    new ResourceDataContent(bpmnResourceStreamHtml, "LoginForm.html"),
+                         new ResourceDataContent(bpmnResourceStreamLoanHtml, "LoanForm.html")
                     );
             }
             catch (Exception e)
