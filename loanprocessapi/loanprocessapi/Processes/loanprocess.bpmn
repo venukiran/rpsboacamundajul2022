@@ -1,48 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1f4z407" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1f4z407" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:process id="LoanProcess" name="Loan Process" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_0herm4d</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_0herm4d" sourceRef="StartEvent_1" targetRef="LoginActivity" />
     <bpmn:endEvent id="Event_19vswxf">
-      <bpmn:incoming>Flow_02gxd75</bpmn:incoming>
+      <bpmn:incoming>Flow_1inhtvn</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_02gxd75" sourceRef="LoginActivity" targetRef="Event_19vswxf" />
+    <bpmn:sequenceFlow id="Flow_02gxd75" sourceRef="LoginActivity" targetRef="LoginValidation" />
     <bpmn:userTask id="LoginActivity" name="Login" camunda:formKey="embedded:deployment:LoginForm.html" camunda:assignee="demo">
       <bpmn:incoming>Flow_0herm4d</bpmn:incoming>
+      <bpmn:incoming>Flow_0lprdki</bpmn:incoming>
       <bpmn:outgoing>Flow_02gxd75</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1inhtvn" sourceRef="LoanApplicationActivity" targetRef="Event_19vswxf" />
+    <bpmn:userTask id="LoanApplicationActivity" name="Loan Application Form" camunda:formKey="embedded:deployment:LoanForm.html" camunda:assignee="demo">
+      <bpmn:incoming>Flow_0v97l3o</bpmn:incoming>
+      <bpmn:outgoing>Flow_1inhtvn</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="LoginValidation" name="Login Validation" camunda:type="external" camunda:topic="loginValidation">
+      <bpmn:incoming>Flow_02gxd75</bpmn:incoming>
+      <bpmn:outgoing>Flow_14gt644</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_0rx8o1r">
+      <bpmn:incoming>Flow_14gt644</bpmn:incoming>
+      <bpmn:outgoing>Flow_0v97l3o</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0lprdki</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_14gt644" sourceRef="LoginValidation" targetRef="Gateway_0rx8o1r" />
+    <bpmn:sequenceFlow id="Flow_0v97l3o" sourceRef="Gateway_0rx8o1r" targetRef="LoanApplicationActivity">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{remark == "accepted"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0lprdki" sourceRef="Gateway_0rx8o1r" targetRef="LoginActivity">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{remark == "rejected"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:textAnnotation id="TextAnnotation_1a8xt1t">
       <bpmn:text>Enter Credentials</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_10i3y7i" sourceRef="LoginActivity" targetRef="TextAnnotation_1a8xt1t" />
+    <bpmn:textAnnotation id="TextAnnotation_1eax1q2">
+      <bpmn:text>Validate Login</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_09azzot" sourceRef="LoginValidation" targetRef="TextAnnotation_1eax1q2" />
+    <bpmn:textAnnotation id="TextAnnotation_0ayqwgh">
+      <bpmn:text>On Failure</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1m4oihg" sourceRef="Gateway_0rx8o1r" targetRef="TextAnnotation_0ayqwgh" />
+    <bpmn:textAnnotation id="TextAnnotation_0gpfajb">
+      <bpmn:text>On Success</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0pgrs97" sourceRef="Gateway_0rx8o1r" targetRef="TextAnnotation_0gpfajb" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="LoanProcess">
       <bpmndi:BPMNShape id="TextAnnotation_1a8xt1t_di" bpmnElement="TextAnnotation_1a8xt1t" bioc:stroke="#8e24aa" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#8e24aa">
-        <dc:Bounds x="310" y="80" width="100" height="41" />
+        <dc:Bounds x="190" y="120" width="100" height="41" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1eax1q2_di" bpmnElement="TextAnnotation_1eax1q2">
+        <dc:Bounds x="460" y="150" width="100" height="30" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0ayqwgh_di" bpmnElement="TextAnnotation_0ayqwgh" bioc:stroke="#8e24aa" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#8e24aa">
+        <dc:Bounds x="520" y="70" width="100" height="30" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0gpfajb_di" bpmnElement="TextAnnotation_0gpfajb" bioc:stroke="#8e24aa" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#8e24aa">
+        <dc:Bounds x="650" y="320" width="100" height="30" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_02gxd75_di" bpmnElement="Flow_02gxd75">
         <di:waypoint x="370" y="247" />
-        <di:waypoint x="432" y="247" />
+        <di:waypoint x="430" y="247" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0herm4d_di" bpmnElement="Flow_0herm4d">
         <di:waypoint x="215" y="247" />
         <di:waypoint x="270" y="247" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1inhtvn_di" bpmnElement="Flow_1inhtvn">
+        <di:waypoint x="820" y="247" />
+        <di:waypoint x="892" y="247" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14gt644_di" bpmnElement="Flow_14gt644">
+        <di:waypoint x="530" y="247" />
+        <di:waypoint x="595" y="247" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0v97l3o_di" bpmnElement="Flow_0v97l3o">
+        <di:waypoint x="645" y="247" />
+        <di:waypoint x="720" y="247" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lprdki_di" bpmnElement="Flow_0lprdki">
+        <di:waypoint x="620" y="222" />
+        <di:waypoint x="620" y="120" />
+        <di:waypoint x="320" y="120" />
+        <di:waypoint x="320" y="207" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
         <dc:Bounds x="179" y="229" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_19vswxf_di" bpmnElement="Event_19vswxf" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
-        <dc:Bounds x="432" y="229" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_164liqd_di" bpmnElement="LoginActivity" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
         <dc:Bounds x="270" y="207" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1les7ul_di" bpmnElement="LoginValidation" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
+        <dc:Bounds x="430" y="207" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_19vswxf_di" bpmnElement="Event_19vswxf" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
+        <dc:Bounds x="892" y="229" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0emvss9_di" bpmnElement="LoanApplicationActivity" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
+        <dc:Bounds x="720" y="207" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0rx8o1r_di" bpmnElement="Gateway_0rx8o1r" isMarkerVisible="true">
+        <dc:Bounds x="595" y="222" width="50" height="50" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_10i3y7i_di" bpmnElement="Association_10i3y7i">
-        <di:waypoint x="331" y="207" />
-        <di:waypoint x="353" y="121" />
+        <di:waypoint x="290" y="207" />
+        <di:waypoint x="254" y="161" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_09azzot_di" bpmnElement="Association_09azzot">
+        <di:waypoint x="495" y="207" />
+        <di:waypoint x="505" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1m4oihg_di" bpmnElement="Association_1m4oihg">
+        <di:waypoint x="614" y="228" />
+        <di:waypoint x="575" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0pgrs97_di" bpmnElement="Association_0pgrs97">
+        <di:waypoint x="632" y="260" />
+        <di:waypoint x="686" y="320" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

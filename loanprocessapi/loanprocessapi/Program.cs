@@ -1,6 +1,8 @@
 
+using Camunda.Worker;
 using Camunda.Worker.Client;
 using loanprocessapi.BPMNDeployment;
+using loanprocessapi.Handlers;
 using Microsoft.Extensions.FileProviders;
 using System.Text.Json.Serialization;
 
@@ -21,6 +23,9 @@ builder.Services.AddExternalTaskClient()
     {
         client.BaseAddress = new Uri(configuration["RestApiUri"]);
     });
+builder.Services.AddCamundaWorker("Loan Worker Service", 1)
+    .AddHandler<LoginValidationHandler>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

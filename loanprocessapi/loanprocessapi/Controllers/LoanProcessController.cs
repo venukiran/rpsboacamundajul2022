@@ -24,8 +24,7 @@ namespace loanprocessapi.Controllers
         }
 
         [HttpPost("startProcess")]
-        public IActionResult StartProcess([FromBody] UserAccount userAccount,
-             LoanBPMNProcess LoanBPMNProcess)
+        public IActionResult StartProcess([FromBody] UserAccount UserAccount,LoanBPMNProcess LoanBPMNProcess)
         {
             _logger.LogInformation("Starting the sample Camunda process...");
             try
@@ -36,15 +35,15 @@ namespace loanprocessapi.Controllers
                 StartProcessInstance processParams;
 
                 //json to string
-                String message = JsonConvert.SerializeObject(userAccount);
+               // String message = JsonConvert.SerializeObject(userAccount);
                 //string to c# pobject
-                UserAccount userAccountObj = JsonConvert.DeserializeObject<UserAccount>(message);
+              //  UserAccount userAccountObj = JsonConvert.DeserializeObject<UserAccount>(message);
 
 
 
                 processParams = new StartProcessInstance()
-                    .SetVariable("UserName", userAccountObj.UserName)
-                   .SetVariable("Password", userAccountObj.Password);
+                    .SetVariable("UserName", "")
+                   .SetVariable("Password", "");
               ;
 
 
