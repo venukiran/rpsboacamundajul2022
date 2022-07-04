@@ -1,0 +1,6 @@
+Camunda Modeler 4/5 BPMN 
+Camunda Engine 7/8 Deployment
+Visual Studio 2022 - .net core 6 framework
+Sql Server 2018 studio -- database
+Web storm -- Reactjs UI
+Nodejs --> Reactjs library management and deployment
