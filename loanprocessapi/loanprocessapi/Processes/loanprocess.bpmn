@@ -96,12 +96,14 @@
       <bpmn:sequenceFlow id="Flow_1vo2lv6" sourceRef="Activity_Upload_Doc" targetRef="Activity_Verify_Doc" />
       <bpmn:userTask id="Activity_Verify_Doc" name="Verify Document" camunda:formKey="embedded:deployment:Task-Form-PDF-Viewer.html" camunda:assignee="demo">
         <bpmn:incoming>Flow_1vo2lv6</bpmn:incoming>
+        <bpmn:incoming>Flow_1baz6ev</bpmn:incoming>
         <bpmn:outgoing>Flow_0cxuj56</bpmn:outgoing>
       </bpmn:userTask>
       <bpmn:exclusiveGateway id="Gateway_0h58f5v">
         <bpmn:incoming>Flow_0cxuj56</bpmn:incoming>
         <bpmn:outgoing>Flow_1mefrwh</bpmn:outgoing>
         <bpmn:outgoing>Flow_1a5hvzr</bpmn:outgoing>
+        <bpmn:outgoing>Flow_092endt</bpmn:outgoing>
       </bpmn:exclusiveGateway>
       <bpmn:sequenceFlow id="Flow_0cxuj56" sourceRef="Activity_Verify_Doc" targetRef="Gateway_0h58f5v" />
       <bpmn:sequenceFlow id="Flow_1mefrwh" sourceRef="Gateway_0h58f5v" targetRef="Activity_Additional_Doc">
@@ -112,11 +114,10 @@
       </bpmn:sequenceFlow>
       <bpmn:userTask id="Activity_Additional_Doc" name="Addtional Document" camunda:assignee="demo">
         <bpmn:incoming>Flow_1mefrwh</bpmn:incoming>
-        <bpmn:outgoing>Flow_0j9we2b</bpmn:outgoing>
+        <bpmn:outgoing>Flow_1baz6ev</bpmn:outgoing>
       </bpmn:userTask>
-      <bpmn:sequenceFlow id="Flow_0j9we2b" sourceRef="Activity_Additional_Doc" targetRef="Activity_Loan_Overwriting" />
       <bpmn:userTask id="Activity_Loan_Overwriting" name="Loan Underwriting" camunda:assignee="demo">
-        <bpmn:incoming>Flow_0j9we2b</bpmn:incoming>
+        <bpmn:incoming>Flow_092endt</bpmn:incoming>
         <bpmn:outgoing>Flow_0hymnxi</bpmn:outgoing>
       </bpmn:userTask>
       <bpmn:sequenceFlow id="Flow_0hymnxi" sourceRef="Activity_Loan_Overwriting" targetRef="Event_1qgu0p4" />
@@ -124,6 +125,10 @@
         <bpmn:incoming>Flow_0hymnxi</bpmn:incoming>
         <bpmn:messageEventDefinition id="MessageEventDefinition_1hpkzwg" />
       </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_092endt" sourceRef="Gateway_0h58f5v" targetRef="Activity_Loan_Overwriting">
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{upload == "ok"}</bpmn:conditionExpression>
+      </bpmn:sequenceFlow>
+      <bpmn:sequenceFlow id="Flow_1baz6ev" sourceRef="Activity_Additional_Doc" targetRef="Activity_Verify_Doc" />
     </bpmn:subProcess>
     <bpmn:textAnnotation id="TextAnnotation_1a8xt1t">
       <bpmn:text>Enter Credentials</bpmn:text>
@@ -235,15 +240,11 @@
         <dc:Bounds x="1050" y="207" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0kocxtj_di" bpmnElement="Activity_Upload" isExpanded="true">
-        <dc:Bounds x="140" y="490" width="1310" height="258" />
+        <dc:Bounds x="140" y="490" width="1310" height="440" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0hymnxi_di" bpmnElement="Flow_0hymnxi">
-        <di:waypoint x="1251" y="618" />
-        <di:waypoint x="1312" y="618" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0j9we2b_di" bpmnElement="Flow_0j9we2b">
-        <di:waypoint x="1091" y="618" />
-        <di:waypoint x="1151" y="618" />
+        <di:waypoint x="1091" y="760" />
+        <di:waypoint x="1142" y="760" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1a5hvzr_di" bpmnElement="Flow_1a5hvzr">
         <di:waypoint x="911" y="593" />
@@ -279,6 +280,17 @@
         <di:waypoint x="249" y="618" />
         <di:waypoint x="291" y="618" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_092endt_di" bpmnElement="Flow_092endt">
+        <di:waypoint x="911" y="643" />
+        <di:waypoint x="911" y="760" />
+        <di:waypoint x="991" y="760" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1baz6ev_di" bpmnElement="Flow_1baz6ev">
+        <di:waypoint x="1041" y="578" />
+        <di:waypoint x="1041" y="510" />
+        <di:waypoint x="781" y="510" />
+        <di:waypoint x="781" y="578" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1bg15e2_di" bpmnElement="Event_Status">
         <dc:Bounds x="213" y="600" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -306,11 +318,11 @@
       <bpmndi:BPMNShape id="Activity_0i8y8t3_di" bpmnElement="Activity_Additional_Doc" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
         <dc:Bounds x="991" y="578" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1cby5i1_di" bpmnElement="Activity_Loan_Overwriting" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
-        <dc:Bounds x="1151" y="578" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0soqv29_di" bpmnElement="Event_1qgu0p4" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
-        <dc:Bounds x="1312" y="600" width="36" height="36" />
+        <dc:Bounds x="1142" y="742" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1cby5i1_di" bpmnElement="Activity_Loan_Overwriting" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
+        <dc:Bounds x="991" y="720" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_1a8xt1t_di" bpmnElement="TextAnnotation_1a8xt1t" bioc:stroke="#8e24aa" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#8e24aa">
         <dc:Bounds x="180" y="120" width="100" height="41" />
