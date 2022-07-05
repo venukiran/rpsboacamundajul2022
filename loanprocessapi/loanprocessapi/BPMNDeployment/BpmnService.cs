@@ -34,6 +34,15 @@ namespace loanprocessapi.BPMNDeployment
             var bpmnResourceStreamPDFViewHtml = this.GetType()
              .Assembly
              .GetManifestResourceStream("loanprocessapi.Forms.Task-Form-PDF-Viewer.html");
+            var bpmnResourceStreamPDFAdditionalUploadHtml = this.GetType()
+             .Assembly
+             .GetManifestResourceStream("loanprocessapi.Forms.Task-Form-PDF-Additional-Upload.html");
+            var bpmnResourceStreamPDFUWUploadHtml = this.GetType()
+                       .Assembly
+                       .GetManifestResourceStream("loanprocessapi.Forms.Task-Form-PDF-UW-Upload.html");
+
+
+
             try
             {
                 await camunda.Deployments.Create(
@@ -48,8 +57,10 @@ namespace loanprocessapi.BPMNDeployment
                           new ResourceDataContent(bpmnResourceStreamLoanDMN, "loansanctionrules.dmn"),
                           new ResourceDataContent(bpmnResourceStreamApprovalHtml, "LoanAcceptanceForm.html"),
                          new ResourceDataContent(bpmnResourceStreamPDFUploadHtml, "Task-Form-PDF-Upload.html"),
-                          new ResourceDataContent(bpmnResourceStreamPDFViewHtml, "Task-Form-PDF-Viewer.html")
-                    );
+                          new ResourceDataContent(bpmnResourceStreamPDFViewHtml, "Task-Form-PDF-Viewer.html"),
+                         new ResourceDataContent(bpmnResourceStreamPDFAdditionalUploadHtml, "Task-Form-PDF-Additional-Upload.html"),
+                          new ResourceDataContent(bpmnResourceStreamPDFUWUploadHtml, "Task-Form-PDF-UW-Upload.html")
+                    ); ;
 
             }
             catch (Exception e)

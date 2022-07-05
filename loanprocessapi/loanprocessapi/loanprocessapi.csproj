@@ -10,8 +10,13 @@
 
   <ItemGroup>
     <None Remove="Decisions\loansanctionrules.dmn" />
+    <None Remove="Forms\LoanAcceptanceForm.html" />
     <None Remove="Forms\LoanForm.html" />
     <None Remove="Forms\LoginForm.html" />
+    <None Remove="Forms\Task-Form-PDF-Additional-Upload.html" />
+    <None Remove="Forms\Task-Form-PDF-Upload.html" />
+    <None Remove="Forms\Task-Form-PDF-UW-Upload.html" />
+    <None Remove="Forms\Task-Form-PDF-Viewer.html" />
     <None Remove="Processes\loanprocess.bpmn" />
   </ItemGroup>
 
@@ -19,10 +24,25 @@
     <EmbeddedResource Include="Decisions\loansanctionrules.dmn">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoanAcceptanceForm.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoanForm.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Task-Form-PDF-Additional-Upload.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Task-Form-PDF-UW-Upload.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Task-Form-PDF-Upload.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Task-Form-PDF-Viewer.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Processes\loanprocess.bpmn">

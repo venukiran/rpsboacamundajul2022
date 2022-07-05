@@ -112,11 +112,11 @@
       <bpmn:sequenceFlow id="Flow_1a5hvzr" sourceRef="Gateway_0h58f5v" targetRef="Activity_Upload_Doc">
         <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{upload == "error"}</bpmn:conditionExpression>
       </bpmn:sequenceFlow>
-      <bpmn:userTask id="Activity_Additional_Doc" name="Addtional Document" camunda:assignee="demo">
+      <bpmn:userTask id="Activity_Additional_Doc" name="Addtional Document" camunda:formKey="embedded:deployment:Task-Form-PDF-Additional-Upload.html" camunda:assignee="demo">
         <bpmn:incoming>Flow_1mefrwh</bpmn:incoming>
         <bpmn:outgoing>Flow_1baz6ev</bpmn:outgoing>
       </bpmn:userTask>
-      <bpmn:userTask id="Activity_Loan_Overwriting" name="Loan Underwriting" camunda:assignee="demo">
+      <bpmn:userTask id="Activity_Loan_Overwriting" name="Loan Underwriting" camunda:formKey="embedded:deployment:Task-Form-PDF-UW-Upload.html" camunda:assignee="demo">
         <bpmn:incoming>Flow_092endt</bpmn:incoming>
         <bpmn:outgoing>Flow_0hymnxi</bpmn:outgoing>
       </bpmn:userTask>
