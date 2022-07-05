@@ -1,0 +1,70 @@
+﻿<form class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label">Applicant Id</label>
+        <div class="controls">
+            <input type="text"
+                   cam-variable-name="ApplicantId"
+                   cam-variable-type="Integer"
+                   readonly
+                   class="form-control" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Age</label>
+        <div class="controls">
+            <input type="text"
+                   cam-variable-name="age"
+                   cam-variable-type="Integer"
+                   readonly
+                   class="form-control" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Experience</label>
+        <div class="controls">
+            <input type="text"
+                   cam-variable-name="experience"
+                   cam-variable-type="Integer"
+                   readonly
+                   class="form-control" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">CIBIL Score</label>
+        <div class="controls">
+            <input type="text"
+                   cam-variable-name="cibilScore"
+                   cam-variable-type="Integer"
+                   readonly
+                   class="form-control" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Required Loan Amount</label>
+        <div class="controls">
+            <input type="text"
+                   cam-variable-name="loanAmount"
+                   cam-variable-type="Long"
+                   readonly
+                   class="form-control" />
+        </div>
+    </div>
+
+    <!-- checkbox -->
+    <div class="form-group">
+        <label for="approved" class="col-sm-2 control-label">Accept?</label>
+        <div class="col-sm-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"
+                           name="approved"
+                           cam-variable-name="approved"
+                           cam-variable-type="Boolean"
+                           checked="checked"
+                           class="form-control" />
+                    approved
+                </label>
+            </div>
+        </div>
+    </div>
+</form>

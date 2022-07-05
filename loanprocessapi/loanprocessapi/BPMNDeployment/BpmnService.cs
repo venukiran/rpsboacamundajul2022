@@ -25,6 +25,9 @@ namespace loanprocessapi.BPMNDeployment
             var bpmnResourceStreamLoanDMN = this.GetType()
              .Assembly
              .GetManifestResourceStream("loanprocessapi.Decisions.loansanctionrules.dmn");
+            var bpmnResourceStreamApprovalHtml = this.GetType()
+             .Assembly
+             .GetManifestResourceStream("loanprocessapi.Forms.LoanAcceptanceForm.html");
 
             try
             {
@@ -37,7 +40,8 @@ namespace loanprocessapi.BPMNDeployment
                     new ResourceDataContent(bpmnResourceStream, "loanprocess.bpmn"),
                     new ResourceDataContent(bpmnResourceStreamHtml, "LoginForm.html"),
                          new ResourceDataContent(bpmnResourceStreamLoanHtml, "LoanForm.html"),
-                          new ResourceDataContent(bpmnResourceStreamLoanDMN, "loansanctionrules.dmn")
+                          new ResourceDataContent(bpmnResourceStreamLoanDMN, "loansanctionrules.dmn"),
+                          new ResourceDataContent(bpmnResourceStreamApprovalHtml, "LoanAcceptanceForm.html")
                     );
 
             }
