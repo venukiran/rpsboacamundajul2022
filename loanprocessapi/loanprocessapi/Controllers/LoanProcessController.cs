@@ -87,6 +87,7 @@ namespace loanprocessapi.Controllers
     }
     public enum LoanBPMNProcess
     {
-        LoanProcess
+        LoanProcess,
+        InsuranceProcess
     }
 }

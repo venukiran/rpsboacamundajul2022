@@ -16,6 +16,9 @@ namespace loanprocessapi.BPMNDeployment
             var bpmnResourceStream = this.GetType()
                 .Assembly
                 .GetManifestResourceStream("loanprocessapi.Processes.loanprocess.bpmn");
+            var bpmnResourceInsuranceStream = this.GetType()
+               .Assembly
+               .GetManifestResourceStream("loanprocessapi.Processes.insuranceprocess.bpmn");
             var bpmnResourceStreamHtml = this.GetType()
                 .Assembly
                 .GetManifestResourceStream("loanprocessapi.Forms.LoginForm.html");
@@ -28,6 +31,9 @@ namespace loanprocessapi.BPMNDeployment
             var bpmnResourceStreamApprovalHtml = this.GetType()
              .Assembly
              .GetManifestResourceStream("loanprocessapi.Forms.LoanAcceptanceForm.html");
+            var bpmnResourceStreamAgeApprovalHtml = this.GetType()
+             .Assembly
+             .GetManifestResourceStream("loanprocessapi.Forms.AgeAcceptanceForm.html");
             var bpmnResourceStreamPDFUploadHtml = this.GetType()
              .Assembly
              .GetManifestResourceStream("loanprocessapi.Forms.Task-Form-PDF-Upload.html");
@@ -52,6 +58,7 @@ namespace loanprocessapi.BPMNDeployment
                     null,
                     null,
                     new ResourceDataContent(bpmnResourceStream, "loanprocess.bpmn"),
+                     new ResourceDataContent(bpmnResourceInsuranceStream, "insuranceprocess.bpmn"),
                     new ResourceDataContent(bpmnResourceStreamHtml, "LoginForm.html"),
                          new ResourceDataContent(bpmnResourceStreamLoanHtml, "LoanForm.html"),
                           new ResourceDataContent(bpmnResourceStreamLoanDMN, "loansanctionrules.dmn"),
@@ -59,7 +66,8 @@ namespace loanprocessapi.BPMNDeployment
                          new ResourceDataContent(bpmnResourceStreamPDFUploadHtml, "Task-Form-PDF-Upload.html"),
                           new ResourceDataContent(bpmnResourceStreamPDFViewHtml, "Task-Form-PDF-Viewer.html"),
                          new ResourceDataContent(bpmnResourceStreamPDFAdditionalUploadHtml, "Task-Form-PDF-Additional-Upload.html"),
-                          new ResourceDataContent(bpmnResourceStreamPDFUWUploadHtml, "Task-Form-PDF-UW-Upload.html")
+                          new ResourceDataContent(bpmnResourceStreamPDFUWUploadHtml, "Task-Form-PDF-UW-Upload.html"),
+                           new ResourceDataContent(bpmnResourceStreamAgeApprovalHtml, "AgeAcceptanceForm.html")
                     ); ;
 
             }

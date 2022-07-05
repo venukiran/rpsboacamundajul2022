@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Decisions\loansanctionrules.dmn" />
+    <None Remove="Forms\AgeAcceptanceForm.html" />
     <None Remove="Forms\LoanAcceptanceForm.html" />
     <None Remove="Forms\LoanForm.html" />
     <None Remove="Forms\LoginForm.html" />
@@ -17,11 +18,15 @@
     <None Remove="Forms\Task-Form-PDF-Upload.html" />
     <None Remove="Forms\Task-Form-PDF-UW-Upload.html" />
     <None Remove="Forms\Task-Form-PDF-Viewer.html" />
+    <None Remove="Processes\insuranceprocess.bpmn" />
     <None Remove="Processes\loanprocess.bpmn" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Decisions\loansanctionrules.dmn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AgeAcceptanceForm.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoanAcceptanceForm.html">
@@ -43,6 +48,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Task-Form-PDF-Viewer.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Processes\insuranceprocess.bpmn">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Processes\loanprocess.bpmn">

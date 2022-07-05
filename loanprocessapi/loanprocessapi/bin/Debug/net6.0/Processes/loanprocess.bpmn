@@ -118,17 +118,56 @@
       </bpmn:userTask>
       <bpmn:userTask id="Activity_Loan_Overwriting" name="Loan Underwriting" camunda:formKey="embedded:deployment:Task-Form-PDF-UW-Upload.html" camunda:assignee="demo">
         <bpmn:incoming>Flow_092endt</bpmn:incoming>
-        <bpmn:outgoing>Flow_0hymnxi</bpmn:outgoing>
+        <bpmn:outgoing>Flow_0v7cwzb</bpmn:outgoing>
       </bpmn:userTask>
-      <bpmn:sequenceFlow id="Flow_0hymnxi" sourceRef="Activity_Loan_Overwriting" targetRef="Event_1qgu0p4" />
-      <bpmn:endEvent id="Event_1qgu0p4">
-        <bpmn:incoming>Flow_0hymnxi</bpmn:incoming>
-        <bpmn:messageEventDefinition id="MessageEventDefinition_1hpkzwg" />
-      </bpmn:endEvent>
       <bpmn:sequenceFlow id="Flow_092endt" sourceRef="Gateway_0h58f5v" targetRef="Activity_Loan_Overwriting">
         <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{upload == "ok"}</bpmn:conditionExpression>
       </bpmn:sequenceFlow>
       <bpmn:sequenceFlow id="Flow_1baz6ev" sourceRef="Activity_Additional_Doc" targetRef="Activity_Verify_Doc" />
+      <bpmn:sequenceFlow id="Flow_0v7cwzb" sourceRef="Activity_Loan_Overwriting" targetRef="Event_0wmn9db" />
+      <bpmn:endEvent id="Event_0wmn9db">
+        <bpmn:incoming>Flow_0v7cwzb</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:subProcess id="Activity_11fgdff" triggeredByEvent="true">
+        <bpmn:callActivity id="Activity_Insurance" name="Insurance Process" calledElement="InsuranceProcess">
+          <bpmn:extensionElements>
+            <camunda:in variables="all" />
+            <camunda:out variables="all" />
+          </bpmn:extensionElements>
+          <bpmn:incoming>Flow_1q4fp78</bpmn:incoming>
+          <bpmn:outgoing>Flow_0zmflih</bpmn:outgoing>
+        </bpmn:callActivity>
+        <bpmn:exclusiveGateway id="Gateway_1cvlx71">
+          <bpmn:incoming>Flow_0zmflih</bpmn:incoming>
+          <bpmn:outgoing>Flow_16or1k5</bpmn:outgoing>
+          <bpmn:outgoing>Flow_04fimta</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:endEvent id="Event_0mih02u">
+          <bpmn:incoming>Flow_04fimta</bpmn:incoming>
+        </bpmn:endEvent>
+        <bpmn:endEvent id="Event_17xzh0l">
+          <bpmn:incoming>Flow_16or1k5</bpmn:incoming>
+          <bpmn:errorEventDefinition id="ErrorEventDefinition_0j9xl2d" errorRef="Error_01jgrht" />
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow id="Flow_04fimta" sourceRef="Gateway_1cvlx71" targetRef="Event_0mih02u">
+          <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{ageApproved}</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
+        <bpmn:sequenceFlow id="Flow_16or1k5" sourceRef="Gateway_1cvlx71" targetRef="Event_17xzh0l">
+          <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{not ageApproved}</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
+        <bpmn:sequenceFlow id="Flow_0zmflih" sourceRef="Activity_Insurance" targetRef="Gateway_1cvlx71" />
+        <bpmn:sequenceFlow id="Flow_1q4fp78" sourceRef="Event_0cgyh6h" targetRef="Activity_Insurance" />
+        <bpmn:startEvent id="Event_0cgyh6h">
+          <bpmn:outgoing>Flow_1q4fp78</bpmn:outgoing>
+          <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_14actrv">
+            <bpmn:condition xsi:type="bpmn:tFormalExpression">#{uwDone}</bpmn:condition>
+          </bpmn:conditionalEventDefinition>
+        </bpmn:startEvent>
+      </bpmn:subProcess>
+      <bpmn:textAnnotation id="TextAnnotation_1ruqgev">
+        <bpmn:text>Inline Sub Process</bpmn:text>
+      </bpmn:textAnnotation>
+      <bpmn:association id="Association_09b7pjd" sourceRef="Activity_11fgdff" targetRef="TextAnnotation_1ruqgev" />
     </bpmn:subProcess>
     <bpmn:textAnnotation id="TextAnnotation_1a8xt1t">
       <bpmn:text>Enter Credentials</bpmn:text>
@@ -163,6 +202,7 @@
       <bpmn:text>Conditional Sub Process</bpmn:text>
     </bpmn:textAnnotation>
   </bpmn:process>
+  <bpmn:error id="Error_01jgrht" name="Insurance_Process_Error" errorCode="1300" camunda:errorMessage="Insurance rejected due to age factor" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="LoanProcess">
       <bpmndi:BPMNEdge id="Flow_1nc592n_di" bpmnElement="Flow_1nc592n">
@@ -240,11 +280,24 @@
         <dc:Bounds x="1050" y="207" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0kocxtj_di" bpmnElement="Activity_Upload" isExpanded="true">
-        <dc:Bounds x="140" y="490" width="1310" height="440" />
+        <dc:Bounds x="140" y="490" width="1870" height="570" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_0hymnxi_di" bpmnElement="Flow_0hymnxi">
+      <bpmndi:BPMNEdge id="Flow_0v7cwzb_di" bpmnElement="Flow_0v7cwzb">
         <di:waypoint x="1091" y="760" />
-        <di:waypoint x="1142" y="760" />
+        <di:waypoint x="1477" y="760" />
+        <di:waypoint x="1477" y="770" />
+        <di:waypoint x="1862" y="770" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1baz6ev_di" bpmnElement="Flow_1baz6ev">
+        <di:waypoint x="1041" y="578" />
+        <di:waypoint x="1041" y="510" />
+        <di:waypoint x="781" y="510" />
+        <di:waypoint x="781" y="578" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_092endt_di" bpmnElement="Flow_092endt">
+        <di:waypoint x="911" y="643" />
+        <di:waypoint x="911" y="760" />
+        <di:waypoint x="991" y="760" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1a5hvzr_di" bpmnElement="Flow_1a5hvzr">
         <di:waypoint x="911" y="593" />
@@ -280,17 +333,6 @@
         <di:waypoint x="249" y="618" />
         <di:waypoint x="291" y="618" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_092endt_di" bpmnElement="Flow_092endt">
-        <di:waypoint x="911" y="643" />
-        <di:waypoint x="911" y="760" />
-        <di:waypoint x="991" y="760" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1baz6ev_di" bpmnElement="Flow_1baz6ev">
-        <di:waypoint x="1041" y="578" />
-        <di:waypoint x="1041" y="510" />
-        <di:waypoint x="781" y="510" />
-        <di:waypoint x="781" y="578" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1bg15e2_di" bpmnElement="Event_Status">
         <dc:Bounds x="213" y="600" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -318,12 +360,55 @@
       <bpmndi:BPMNShape id="Activity_0i8y8t3_di" bpmnElement="Activity_Additional_Doc" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
         <dc:Bounds x="991" y="578" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0soqv29_di" bpmnElement="Event_1qgu0p4" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
-        <dc:Bounds x="1142" y="742" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1cby5i1_di" bpmnElement="Activity_Loan_Overwriting" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
         <dc:Bounds x="991" y="720" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0wmn9db_di" bpmnElement="Event_0wmn9db" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
+        <dc:Bounds x="1862" y="752" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1ruqgev_di" bpmnElement="TextAnnotation_1ruqgev">
+        <dc:Bounds x="1590" y="560" width="100" height="41" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_15ijncr_di" bpmnElement="Activity_11fgdff" isExpanded="true" bioc:stroke="#8e24aa" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#8e24aa">
+        <dc:Bounds x="1260" y="660" width="470" height="220" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_04fimta_di" bpmnElement="Flow_04fimta">
+        <di:waypoint x="1570" y="785" />
+        <di:waypoint x="1570" y="820" />
+        <di:waypoint x="1642" y="820" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16or1k5_di" bpmnElement="Flow_16or1k5">
+        <di:waypoint x="1570" y="735" />
+        <di:waypoint x="1570" y="690" />
+        <di:waypoint x="1642" y="690" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0zmflih_di" bpmnElement="Flow_0zmflih">
+        <di:waypoint x="1490" y="760" />
+        <di:waypoint x="1545" y="760" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1q4fp78_di" bpmnElement="Flow_1q4fp78">
+        <di:waypoint x="1336" y="760" />
+        <di:waypoint x="1390" y="760" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1sdzi9m_di" bpmnElement="Activity_Insurance" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
+        <dc:Bounds x="1390" y="720" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1cvlx71_di" bpmnElement="Gateway_1cvlx71" isMarkerVisible="true">
+        <dc:Bounds x="1545" y="735" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0mih02u_di" bpmnElement="Event_0mih02u" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
+        <dc:Bounds x="1642" y="802" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0os6yqa_di" bpmnElement="Event_17xzh0l" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
+        <dc:Bounds x="1642" y="672" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_17qhdeo_di" bpmnElement="Event_0cgyh6h" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
+        <dc:Bounds x="1300" y="742" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_09b7pjd_di" bpmnElement="Association_09b7pjd">
+        <di:waypoint x="1577" y="660" />
+        <di:waypoint x="1621" y="601" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_1a8xt1t_di" bpmnElement="TextAnnotation_1a8xt1t" bioc:stroke="#8e24aa" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#8e24aa">
         <dc:Bounds x="180" y="120" width="100" height="41" />
       </bpmndi:BPMNShape>
