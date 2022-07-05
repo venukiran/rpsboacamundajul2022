@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_Loan" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.11.0">
+  <decision id="loan_decision" name="Loan Decision">
+    <decisionTable id="DecisionTable_0ugx1do" hitPolicy="FIRST">
+      <input id="Input_1" label="Loan Amount" biodi:width="192" camunda:inputVariable="loanAmount">
+        <inputExpression id="InputExpression_1" typeRef="long">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0k9xb9i" label="Age" camunda:inputVariable="age">
+        <inputExpression id="LiteralExpression_0dz3qmj" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0t1nghw" label="Experience" biodi:width="192" camunda:inputVariable="experience">
+        <inputExpression id="LiteralExpression_1qbt5qc" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1nalyvf" label="CIBIL Score" camunda:inputVariable="cibilScore">
+        <inputExpression id="LiteralExpression_1svnnw9" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Status" name="status" typeRef="string" />
+      <rule id="DecisionRule_1t2ypn4">
+        <inputEntry id="UnaryTests_0p4q4o3">
+          <text>[100000..700000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03eqve9">
+          <text>&gt;21</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_091lmoj">
+          <text>[2..3]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ry5r2s">
+          <text>&gt;750</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1w5ptmp">
+          <text>"sanctioned"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1q4knc0">
+        <inputEntry id="UnaryTests_0zc09fa">
+          <text>[700001..1400000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1yyt3z4">
+          <text>&gt;25</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xrd75f">
+          <text>[4..6]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0fyfit4">
+          <text>&gt;750</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0326hmf">
+          <text>"sanctioned"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_15phkbc">
+        <inputEntry id="UnaryTests_012k7lf">
+          <text>[100000..700000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mm3zzo">
+          <text>&lt;21</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0i708sc">
+          <text>&lt;2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lvury6">
+          <text>&lt;750</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1pf56qx">
+          <text>"rejected"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0h5m6lr">
+        <inputEntry id="UnaryTests_1ngiz3f">
+          <text>[700001..1400000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06s01pj">
+          <text>&lt;25</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0omgnol">
+          <text>&lt;3</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hiq45c">
+          <text>&lt;750</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1h5fyim">
+          <text>"rejected"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0x3o93s">
+        <inputEntry id="UnaryTests_0cz4v0w">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ie6ij0">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0usjj70">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0sgtgjl">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0resz0p">
+          <text>"rejected"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="loan_decision">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

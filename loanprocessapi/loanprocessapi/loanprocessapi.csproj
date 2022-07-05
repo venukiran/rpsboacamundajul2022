@@ -9,12 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Decisions\loansanctionrules.dmn" />
     <None Remove="Forms\LoanForm.html" />
     <None Remove="Forms\LoginForm.html" />
     <None Remove="Processes\loanprocess.bpmn" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Decisions\loansanctionrules.dmn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoanForm.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

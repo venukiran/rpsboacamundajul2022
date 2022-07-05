@@ -24,7 +24,8 @@ builder.Services.AddExternalTaskClient()
         client.BaseAddress = new Uri(configuration["RestApiUri"]);
     });
 builder.Services.AddCamundaWorker("Loan Worker Service", 1)
-    .AddHandler<LoginValidationHandler>();
+    .AddHandler<LoginValidationHandler>()
+    .AddHandler<LogHandler>();
 
 var app = builder.Build();
 

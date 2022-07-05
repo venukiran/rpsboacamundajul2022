@@ -1,6 +1,8 @@
 G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\appsettings.Development.json
 G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\appsettings.json
 G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\loanprocessapi.exe
+G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\Decisions\loansanctionrules.dmn
+G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\Forms\LoanForm.html
 G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\Forms\LoginForm.html
 G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\Processes\loanprocess.bpmn
 G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\loanprocessapi.deps.json
@@ -32,4 +34,3 @@ G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\obj\Debug\net6.0\r
 G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\obj\Debug\net6.0\loanprocessapi.pdb
 G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\obj\Debug\net6.0\loanprocessapi.genruntimeconfig.cache
 G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\obj\Debug\net6.0\ref\loanprocessapi.dll
-G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\Forms\LoanForm.html
