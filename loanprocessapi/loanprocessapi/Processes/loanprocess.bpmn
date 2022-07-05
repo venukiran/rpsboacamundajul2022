@@ -69,7 +69,7 @@
         </bpmn:conditionalEventDefinition>
       </bpmn:startEvent>
       <bpmn:sequenceFlow id="Flow_009gz2n" sourceRef="Event_Status" targetRef="Activity_Acceptance" />
-      <bpmn:userTask id="Activity_Acceptance" name="Customer Acceptance Form" camunda:assignee="demo">
+      <bpmn:userTask id="Activity_Acceptance" name="Customer Acceptance Form" camunda:formKey="embedded:deployment:LoanAcceptanceForm.html" camunda:assignee="demo">
         <bpmn:incoming>Flow_009gz2n</bpmn:incoming>
         <bpmn:outgoing>Flow_0x2t2fi</bpmn:outgoing>
       </bpmn:userTask>
@@ -88,13 +88,13 @@
       <bpmn:sequenceFlow id="Flow_0mbxi06" sourceRef="Gateway_18m3e0p" targetRef="Event_0q3c0yh">
         <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{not approved}</bpmn:conditionExpression>
       </bpmn:sequenceFlow>
-      <bpmn:userTask id="Activity_Upload_Doc" name="Upload Document" camunda:assignee="demo">
+      <bpmn:userTask id="Activity_Upload_Doc" name="Upload Document" camunda:formKey="embedded:deployment:Task-Form-PDF-Upload.html" camunda:assignee="demo">
         <bpmn:incoming>Flow_0jisymg</bpmn:incoming>
         <bpmn:incoming>Flow_1a5hvzr</bpmn:incoming>
         <bpmn:outgoing>Flow_1vo2lv6</bpmn:outgoing>
       </bpmn:userTask>
       <bpmn:sequenceFlow id="Flow_1vo2lv6" sourceRef="Activity_Upload_Doc" targetRef="Activity_Verify_Doc" />
-      <bpmn:userTask id="Activity_Verify_Doc" name="Verify Document" camunda:assignee="demo">
+      <bpmn:userTask id="Activity_Verify_Doc" name="Verify Document" camunda:formKey="embedded:deployment:Task-Form-PDF-Viewer.html" camunda:assignee="demo">
         <bpmn:incoming>Flow_1vo2lv6</bpmn:incoming>
         <bpmn:outgoing>Flow_0cxuj56</bpmn:outgoing>
       </bpmn:userTask>
