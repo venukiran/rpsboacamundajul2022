@@ -11,6 +11,7 @@
           "Camunda.Api.Client": "2.6.0",
           "Camunda.Worker": "0.13.4",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.14.0",
+          "Pomelo.EntityFrameworkCore.MySql": "6.0.1",
           "Swashbuckle.AspNetCore": "6.2.3"
         },
         "runtime": {
@@ -45,7 +46,59 @@
           }
         }
       },
+      "Microsoft.EntityFrameworkCore/6.0.1": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Abstractions": "6.0.1",
+          "Microsoft.EntityFrameworkCore.Analyzers": "6.0.1",
+          "Microsoft.Extensions.Caching.Memory": "6.0.0",
+          "Microsoft.Extensions.DependencyInjection": "6.0.0",
+          "Microsoft.Extensions.Logging": "6.0.0",
+          "System.Collections.Immutable": "6.0.0",
+          "System.Diagnostics.DiagnosticSource": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.dll": {
+            "assemblyVersion": "6.0.1.0",
+            "fileVersion": "6.0.121.56712"
+          }
+        }
+      },
+      "Microsoft.EntityFrameworkCore.Abstractions/6.0.1": {
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
+            "assemblyVersion": "6.0.1.0",
+            "fileVersion": "6.0.121.56712"
+          }
+        }
+      },
+      "Microsoft.EntityFrameworkCore.Analyzers/6.0.1": {},
+      "Microsoft.EntityFrameworkCore.Relational/6.0.1": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.1",
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.Relational.dll": {
+            "assemblyVersion": "6.0.1.0",
+            "fileVersion": "6.0.121.56712"
+          }
+        }
+      },
       "Microsoft.Extensions.ApiDescription.Server/3.0.0": {},
+      "Microsoft.Extensions.Caching.Abstractions/6.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "6.0.0"
+        }
+      },
+      "Microsoft.Extensions.Caching.Memory/6.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Caching.Abstractions": "6.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Options": "6.0.0",
+          "Microsoft.Extensions.Primitives": "6.0.0"
+        }
+      },
       "Microsoft.Extensions.Configuration.Abstractions/6.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "6.0.0"
@@ -110,11 +163,32 @@
         }
       },
       "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.14.0": {},
+      "MySqlConnector/2.1.2": {
+        "runtime": {
+          "lib/net6.0/MySqlConnector.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.1.2.0"
+          }
+        }
+      },
       "Newtonsoft.Json/12.0.3": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "12.0.0.0",
             "fileVersion": "12.0.3.23909"
+          }
+        }
+      },
+      "Pomelo.EntityFrameworkCore.MySql/6.0.1": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.1",
+          "Microsoft.Extensions.DependencyInjection": "6.0.0",
+          "MySqlConnector": "2.1.2"
+        },
+        "runtime": {
+          "lib/net6.0/Pomelo.EntityFrameworkCore.MySql.dll": {
+            "assemblyVersion": "6.0.1.0",
+            "fileVersion": "6.0.1.0"
           }
         }
       },
@@ -228,6 +302,11 @@
           "System.Runtime.Extensions": "4.3.0",
           "System.Threading": "4.3.0",
           "System.Threading.Tasks": "4.3.0"
+        }
+      },
+      "System.Collections.Immutable/6.0.0": {
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         }
       },
       "System.Diagnostics.Debug/4.3.0": {
@@ -576,12 +655,54 @@
       "path": "camunda.worker/0.13.4",
       "hashPath": "camunda.worker.0.13.4.nupkg.sha512"
     },
+    "Microsoft.EntityFrameworkCore/6.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UmZBVaRbOgtbYkp4x8W9j8HBd7ywzPRPj5StSiqFt/nsH6nOf1eQmHFfjIRb70cxsuC0NbkFBAAoUHFRCscCKA==",
+      "path": "microsoft.entityframeworkcore/6.0.1",
+      "hashPath": "microsoft.entityframeworkcore.6.0.1.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.Abstractions/6.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JM55+h9Ln9MZAFikvmgrmDoIt4Zz9ZWZpNrmyi9QTVuJMzQQOEnJkISKp5Ebvpno6Jt00Gkrfmvu8K5mFPO+dA==",
+      "path": "microsoft.entityframeworkcore.abstractions/6.0.1",
+      "hashPath": "microsoft.entityframeworkcore.abstractions.6.0.1.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.Analyzers/6.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fp8VTLv1up7EGAa9Daf+IErpq63hiKtWeApoxgnkMjURdjkbVcwaA4AozwHjEqVVQugGqwroHes4HVp24cDDAw==",
+      "path": "microsoft.entityframeworkcore.analyzers/6.0.1",
+      "hashPath": "microsoft.entityframeworkcore.analyzers.6.0.1.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.Relational/6.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-abaCEEeeB0xlMYDD+m9kmhQh5aipJ5s3UbyQVBfMaZeCiZHXST0eWuJRX63E3e7K/mju5WEHiybV/hizng7q/w==",
+      "path": "microsoft.entityframeworkcore.relational/6.0.1",
+      "hashPath": "microsoft.entityframeworkcore.relational.6.0.1.nupkg.sha512"
+    },
     "Microsoft.Extensions.ApiDescription.Server/3.0.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-LH4OE/76F6sOCslif7+Xh3fS/wUUrE5ryeXAMcoCnuwOQGT5Smw0p57IgDh/pHgHaGz/e+AmEQb7pRgb++wt0w==",
       "path": "microsoft.extensions.apidescription.server/3.0.0",
       "hashPath": "microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Caching.Abstractions/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bcz5sSFJbganH0+YrfvIjJDIcKNW7TL07C4d1eTmXy/wOt52iz4LVogJb6pazs7W0+74j0YpXFErvp++Aq5Bsw==",
+      "path": "microsoft.extensions.caching.abstractions/6.0.0",
+      "hashPath": "microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Caching.Memory/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ve3BlCzhAlVp5IgO3+8dacAhZk1A0GlIlFNkAcfR2TfAibLKWIt5DhVJZfu4YtW+XZ89OjYf/agMcgjDtPxdGA==",
+      "path": "microsoft.extensions.caching.memory/6.0.0",
+      "hashPath": "microsoft.extensions.caching.memory.6.0.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration.Abstractions/6.0.0": {
       "type": "package",
@@ -681,12 +802,26 @@
       "path": "microsoft.visualstudio.azure.containers.tools.targets/1.14.0",
       "hashPath": "microsoft.visualstudio.azure.containers.tools.targets.1.14.0.nupkg.sha512"
     },
+    "MySqlConnector/2.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JVokQTUNN3WHAu9Vw8ieeq1dXTFokJiig5P0VJ4f439UxRrsPo6SaVWC8Zdm6mkPeQFhZ0/9afdWa02EY/1j/w==",
+      "path": "mysqlconnector/2.1.2",
+      "hashPath": "mysqlconnector.2.1.2.nupkg.sha512"
+    },
     "Newtonsoft.Json/12.0.3": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "path": "newtonsoft.json/12.0.3",
       "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+    },
+    "Pomelo.EntityFrameworkCore.MySql/6.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sFIo5e9RmQoCTEvH6EeSV8ptmX3dw/6XgyD8R93X/i7A9+XCeG9KTjSNjrszVjVOtCu/eyvYqqcv2uZ/BHhlYA==",
+      "path": "pomelo.entityframeworkcore.mysql/6.0.1",
+      "hashPath": "pomelo.entityframeworkcore.mysql.6.0.1.nupkg.sha512"
     },
     "Refit/5.0.23": {
       "type": "package",
@@ -841,6 +976,13 @@
       "sha512": "sha512-ztl69Xp0Y/UXCL+3v3tEU+lIy+bvjKNUmopn1wep/a291pVPK7dxBd6T7WnlQqRog+d1a/hSsgRsmFnIBKTPLQ==",
       "path": "system.collections.concurrent/4.3.0",
       "hashPath": "system.collections.concurrent.4.3.0.nupkg.sha512"
+    },
+    "System.Collections.Immutable/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-l4zZJ1WU2hqpQQHXz1rvC3etVZN+2DLmQMO79FhOTZHMn8tDRr+WU287sbomD0BETlmKDn0ygUgVy9k5xkkJdA==",
+      "path": "system.collections.immutable/6.0.0",
+      "hashPath": "system.collections.immutable.6.0.0.nupkg.sha512"
     },
     "System.Diagnostics.Debug/4.3.0": {
       "type": "package",
