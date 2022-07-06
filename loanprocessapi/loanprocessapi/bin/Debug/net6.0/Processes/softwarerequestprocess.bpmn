@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1m78nnc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="SWRequestProcess" name="Software Request Process" isExecutable="true">
+    <bpmn:startEvent id="SW_Req_Message_Activity" name="Software Request Message ">
+      <bpmn:outgoing>Flow_19xx9j0</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0476xpa" messageRef="Message_0zai3jw" />
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_19xx9j0" sourceRef="SW_Req_Message_Activity" targetRef="SW_Request_Send_Activity" />
+    <bpmn:endEvent id="Event_13mcwcf">
+      <bpmn:incoming>Flow_0trfci3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0trfci3" sourceRef="SW_Request_Send_Activity" targetRef="Event_13mcwcf" />
+    <bpmn:sendTask id="SW_Request_Send_Activity" name="Receive Software Request" camunda:type="external" camunda:topic="swrequest">
+      <bpmn:incoming>Flow_19xx9j0</bpmn:incoming>
+      <bpmn:outgoing>Flow_0trfci3</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:textAnnotation id="TextAnnotation_0ku8tor">
+      <bpmn:text>Send Task</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0ve8x2z" sourceRef="SW_Request_Send_Activity" targetRef="TextAnnotation_0ku8tor" />
+  </bpmn:process>
+  <bpmn:message id="Message_0zai3jw" name="SWRequest_Message" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="SWRequestProcess">
+      <bpmndi:BPMNEdge id="Flow_0trfci3_di" bpmnElement="Flow_0trfci3">
+        <di:waypoint x="410" y="197" />
+        <di:waypoint x="472" y="197" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19xx9j0_di" bpmnElement="Flow_19xx9j0">
+        <di:waypoint x="215" y="197" />
+        <di:waypoint x="310" y="197" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_018fsg0_di" bpmnElement="SW_Req_Message_Activity" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
+        <dc:Bounds x="179" y="179" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="154" y="222" width="89" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_13mcwcf_di" bpmnElement="Event_13mcwcf" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
+        <dc:Bounds x="472" y="179" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0y44mba_di" bpmnElement="SW_Request_Send_Activity" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
+        <dc:Bounds x="310" y="157" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0ku8tor_di" bpmnElement="TextAnnotation_0ku8tor" bioc:stroke="#8e24aa" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#8e24aa">
+        <dc:Bounds x="340" y="80" width="100" height="30" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0ve8x2z_di" bpmnElement="Association_0ve8x2z">
+        <di:waypoint x="372" y="157" />
+        <di:waypoint x="386" y="110" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

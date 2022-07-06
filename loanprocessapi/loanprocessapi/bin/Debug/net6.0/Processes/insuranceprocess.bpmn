@@ -1,51 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1m8alf0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1m8alf0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:process id="InsuranceProcess" name="Insurance Process" isExecutable="true">
-    <bpmn:endEvent id="Event_0y25teb">
-      <bpmn:incoming>Flow_12jqodl</bpmn:incoming>
+    <bpmn:sequenceFlow id="Flow_0z461gb" sourceRef="Event_1c3b19k" targetRef="Verify_Age_Activity" />
+    <bpmn:endEvent id="Event_02ioh65">
+      <bpmn:incoming>Flow_0o24zyb</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_12jqodl" sourceRef="Verify_Age_Activity" targetRef="Event_0y25teb" />
+    <bpmn:sequenceFlow id="Flow_0o24zyb" sourceRef="Verify_Age_Activity" targetRef="Event_02ioh65" />
     <bpmn:userTask id="Verify_Age_Activity" name="Verify Age" camunda:formKey="embedded:deployment:AgeAcceptanceForm.html" camunda:assignee="demo">
-      <bpmn:incoming>Flow_0hexxjv</bpmn:incoming>
-      <bpmn:outgoing>Flow_12jqodl</bpmn:outgoing>
+      <bpmn:incoming>Flow_0z461gb</bpmn:incoming>
+      <bpmn:outgoing>Flow_0o24zyb</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_0hexxjv" sourceRef="StartEvent_1" targetRef="Verify_Age_Activity" />
-    <bpmn:startEvent id="StartEvent_1">
-      <bpmn:outgoing>Flow_0hexxjv</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0f1iqde" messageRef="Message_13bsh53" />
+    <bpmn:startEvent id="Event_1c3b19k">
+      <bpmn:outgoing>Flow_0z461gb</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:textAnnotation id="TextAnnotation_0jhjfgc">
-      <bpmn:text>Age Approval</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_05t6bjv" sourceRef="Verify_Age_Activity" targetRef="TextAnnotation_0jhjfgc" />
   </bpmn:process>
   <bpmn:message id="Message_13bsh53" name="Age_Message" />
+  <bpmn:message id="Message_1q2h3tm" name="Verify_Age_Message" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="InsuranceProcess">
-      <bpmndi:BPMNEdge id="Flow_12jqodl_di" bpmnElement="Flow_12jqodl">
-        <di:waypoint x="370" y="177" />
-        <di:waypoint x="432" y="177" />
+      <bpmndi:BPMNEdge id="Flow_0o24zyb_di" bpmnElement="Flow_0o24zyb">
+        <di:waypoint x="340" y="120" />
+        <di:waypoint x="392" y="120" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0hexxjv_di" bpmnElement="Flow_0hexxjv">
-        <di:waypoint x="215" y="177" />
-        <di:waypoint x="270" y="177" />
+      <bpmndi:BPMNEdge id="Flow_0z461gb_di" bpmnElement="Flow_0z461gb">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="240" y="120" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_0y25teb_di" bpmnElement="Event_0y25teb" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
-        <dc:Bounds x="432" y="159" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_02ioh65_di" bpmnElement="Event_02ioh65" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
+        <dc:Bounds x="392" y="102" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_07eq11g_di" bpmnElement="Verify_Age_Activity" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
-        <dc:Bounds x="270" y="137" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_12tgzsp_di" bpmnElement="Verify_Age_Activity" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#1e88e5">
+        <dc:Bounds x="240" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_0jhjfgc_di" bpmnElement="TextAnnotation_0jhjfgc" bioc:stroke="#8e24aa" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#8e24aa">
-        <dc:Bounds x="320" y="80" width="100" height="30" />
+      <bpmndi:BPMNShape id="Event_0hjfc7l_di" bpmnElement="Event_1c3b19k" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0kd4e48_di" bpmnElement="StartEvent_1" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
-        <dc:Bounds x="179" y="159" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_05t6bjv_di" bpmnElement="Association_05t6bjv" bioc:stroke="#8e24aa" color:border-color="#8e24aa">
-        <di:waypoint x="344" y="137" />
-        <di:waypoint x="361" y="110" />
-      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

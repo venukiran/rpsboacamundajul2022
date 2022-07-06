@@ -118,17 +118,19 @@
       </bpmn:userTask>
       <bpmn:userTask id="Activity_Loan_Overwriting" name="Loan Underwriting" camunda:formKey="embedded:deployment:Task-Form-PDF-UW-Upload.html" camunda:assignee="demo">
         <bpmn:incoming>Flow_092endt</bpmn:incoming>
-        <bpmn:outgoing>Flow_0v7cwzb</bpmn:outgoing>
+        <bpmn:incoming>Flow_09j92k3</bpmn:incoming>
+        <bpmn:outgoing>Flow_04jinn3</bpmn:outgoing>
       </bpmn:userTask>
       <bpmn:sequenceFlow id="Flow_092endt" sourceRef="Gateway_0h58f5v" targetRef="Activity_Loan_Overwriting">
         <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{upload == "ok"}</bpmn:conditionExpression>
       </bpmn:sequenceFlow>
       <bpmn:sequenceFlow id="Flow_1baz6ev" sourceRef="Activity_Additional_Doc" targetRef="Activity_Verify_Doc" />
-      <bpmn:sequenceFlow id="Flow_0v7cwzb" sourceRef="Activity_Loan_Overwriting" targetRef="Event_0wmn9db" />
       <bpmn:endEvent id="Event_0wmn9db">
-        <bpmn:incoming>Flow_0v7cwzb</bpmn:incoming>
+        <bpmn:incoming>Flow_0gu7sw3</bpmn:incoming>
       </bpmn:endEvent>
-      <bpmn:subProcess id="Activity_11fgdff" triggeredByEvent="true">
+      <bpmn:subProcess id="Activity_11fgdff">
+        <bpmn:incoming>Flow_04jinn3</bpmn:incoming>
+        <bpmn:outgoing>Flow_0gu7sw3</bpmn:outgoing>
         <bpmn:callActivity id="Activity_Insurance" name="Insurance Process" calledElement="InsuranceProcess">
           <bpmn:extensionElements>
             <camunda:in variables="all" />
@@ -149,21 +151,27 @@
           <bpmn:incoming>Flow_16or1k5</bpmn:incoming>
           <bpmn:errorEventDefinition id="ErrorEventDefinition_0j9xl2d" errorRef="Error_01jgrht" />
         </bpmn:endEvent>
-        <bpmn:sequenceFlow id="Flow_04fimta" sourceRef="Gateway_1cvlx71" targetRef="Event_0mih02u">
-          <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{ageApproved}</bpmn:conditionExpression>
-        </bpmn:sequenceFlow>
+        <bpmn:sequenceFlow id="Flow_1q4fp78" sourceRef="Event_0cgyh6h" targetRef="Activity_Insurance" />
+        <bpmn:sequenceFlow id="Flow_0zmflih" sourceRef="Activity_Insurance" targetRef="Gateway_1cvlx71" />
         <bpmn:sequenceFlow id="Flow_16or1k5" sourceRef="Gateway_1cvlx71" targetRef="Event_17xzh0l">
           <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{not ageApproved}</bpmn:conditionExpression>
         </bpmn:sequenceFlow>
-        <bpmn:sequenceFlow id="Flow_0zmflih" sourceRef="Activity_Insurance" targetRef="Gateway_1cvlx71" />
-        <bpmn:sequenceFlow id="Flow_1q4fp78" sourceRef="Event_0cgyh6h" targetRef="Activity_Insurance" />
+        <bpmn:sequenceFlow id="Flow_04fimta" sourceRef="Gateway_1cvlx71" targetRef="Event_0mih02u">
+          <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{ageApproved}</bpmn:conditionExpression>
+        </bpmn:sequenceFlow>
         <bpmn:startEvent id="Event_0cgyh6h">
           <bpmn:outgoing>Flow_1q4fp78</bpmn:outgoing>
-          <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_14actrv">
-            <bpmn:condition xsi:type="bpmn:tFormalExpression">#{uwDone}</bpmn:condition>
-          </bpmn:conditionalEventDefinition>
         </bpmn:startEvent>
       </bpmn:subProcess>
+      <bpmn:boundaryEvent id="Event_1dvbkag" attachedToRef="Activity_11fgdff">
+        <bpmn:outgoing>Flow_09j92k3</bpmn:outgoing>
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_07czrv0" errorRef="Error_01jgrht" />
+      </bpmn:boundaryEvent>
+      <bpmn:sequenceFlow id="Flow_09j92k3" sourceRef="Event_1dvbkag" targetRef="Activity_Loan_Overwriting" />
+      <bpmn:sequenceFlow id="Flow_04jinn3" sourceRef="Activity_Loan_Overwriting" targetRef="Activity_11fgdff">
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{uwDone}</bpmn:conditionExpression>
+      </bpmn:sequenceFlow>
+      <bpmn:sequenceFlow id="Flow_0gu7sw3" sourceRef="Activity_11fgdff" targetRef="Event_0wmn9db" />
       <bpmn:textAnnotation id="TextAnnotation_1ruqgev">
         <bpmn:text>Inline Sub Process</bpmn:text>
       </bpmn:textAnnotation>
@@ -282,11 +290,15 @@
       <bpmndi:BPMNShape id="Activity_0kocxtj_di" bpmnElement="Activity_Upload" isExpanded="true">
         <dc:Bounds x="140" y="490" width="1870" height="570" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_0v7cwzb_di" bpmnElement="Flow_0v7cwzb">
+      <bpmndi:BPMNEdge id="Flow_04jinn3_di" bpmnElement="Flow_04jinn3">
         <di:waypoint x="1091" y="760" />
-        <di:waypoint x="1477" y="760" />
-        <di:waypoint x="1477" y="770" />
-        <di:waypoint x="1862" y="770" />
+        <di:waypoint x="1260" y="760" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09j92k3_di" bpmnElement="Flow_09j92k3">
+        <di:waypoint x="1460" y="898" />
+        <di:waypoint x="1460" y="960" />
+        <di:waypoint x="1041" y="960" />
+        <di:waypoint x="1041" y="800" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1baz6ev_di" bpmnElement="Flow_1baz6ev">
         <di:waypoint x="1041" y="578" />
@@ -333,6 +345,10 @@
         <di:waypoint x="249" y="618" />
         <di:waypoint x="291" y="618" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gu7sw3_di" bpmnElement="Flow_0gu7sw3">
+        <di:waypoint x="1730" y="770" />
+        <di:waypoint x="1862" y="770" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1bg15e2_di" bpmnElement="Event_Status">
         <dc:Bounds x="213" y="600" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -366,10 +382,7 @@
       <bpmndi:BPMNShape id="Event_0wmn9db_di" bpmnElement="Event_0wmn9db" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
         <dc:Bounds x="1862" y="752" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1ruqgev_di" bpmnElement="TextAnnotation_1ruqgev">
-        <dc:Bounds x="1590" y="560" width="100" height="41" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_15ijncr_di" bpmnElement="Activity_11fgdff" isExpanded="true" bioc:stroke="#8e24aa" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#8e24aa">
+      <bpmndi:BPMNShape id="Activity_188m9rh_di" bpmnElement="Activity_11fgdff" isExpanded="true" bioc:stroke="#8e24aa" bioc:fill="#e1bee7" color:background-color="#e1bee7" color:border-color="#8e24aa">
         <dc:Bounds x="1260" y="660" width="470" height="220" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_04fimta_di" bpmnElement="Flow_04fimta">
@@ -402,8 +415,14 @@
       <bpmndi:BPMNShape id="Event_0os6yqa_di" bpmnElement="Event_17xzh0l" bioc:stroke="#e53935" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#e53935">
         <dc:Bounds x="1642" y="672" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_17qhdeo_di" bpmnElement="Event_0cgyh6h" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
+      <bpmndi:BPMNShape id="Event_0cfbo5r_di" bpmnElement="Event_0cgyh6h" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
         <dc:Bounds x="1300" y="742" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1ruqgev_di" bpmnElement="TextAnnotation_1ruqgev">
+        <dc:Bounds x="1590" y="560" width="100" height="41" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1qarg1o_di" bpmnElement="Event_1dvbkag" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
+        <dc:Bounds x="1442" y="862" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_09b7pjd_di" bpmnElement="Association_09b7pjd">
         <di:waypoint x="1577" y="660" />

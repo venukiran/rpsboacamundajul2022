@@ -20,6 +20,7 @@
     <None Remove="Forms\Task-Form-PDF-Viewer.html" />
     <None Remove="Processes\insuranceprocess.bpmn" />
     <None Remove="Processes\loanprocess.bpmn" />
+    <None Remove="Processes\softwarerequestprocess.bpmn" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +55,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Processes\loanprocess.bpmn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Processes\softwarerequestprocess.bpmn">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

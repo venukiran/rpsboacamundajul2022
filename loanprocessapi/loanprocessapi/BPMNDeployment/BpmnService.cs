@@ -19,6 +19,9 @@ namespace loanprocessapi.BPMNDeployment
             var bpmnResourceInsuranceStream = this.GetType()
                .Assembly
                .GetManifestResourceStream("loanprocessapi.Processes.insuranceprocess.bpmn");
+            var bpmnResourceSWRequestStream = this.GetType()
+               .Assembly
+               .GetManifestResourceStream("loanprocessapi.Processes.softwarerequestprocess.bpmn");
             var bpmnResourceStreamHtml = this.GetType()
                 .Assembly
                 .GetManifestResourceStream("loanprocessapi.Forms.LoginForm.html");
@@ -59,6 +62,7 @@ namespace loanprocessapi.BPMNDeployment
                     null,
                     new ResourceDataContent(bpmnResourceStream, "loanprocess.bpmn"),
                      new ResourceDataContent(bpmnResourceInsuranceStream, "insuranceprocess.bpmn"),
+                     new ResourceDataContent(bpmnResourceSWRequestStream, "softwarerequestprocess.bpmn"),
                     new ResourceDataContent(bpmnResourceStreamHtml, "LoginForm.html"),
                          new ResourceDataContent(bpmnResourceStreamLoanHtml, "LoanForm.html"),
                           new ResourceDataContent(bpmnResourceStreamLoanDMN, "loansanctionrules.dmn"),

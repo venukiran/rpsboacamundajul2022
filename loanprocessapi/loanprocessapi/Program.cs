@@ -25,7 +25,9 @@ builder.Services.AddExternalTaskClient()
     });
 builder.Services.AddCamundaWorker("Loan Worker Service", 1)
     .AddHandler<LoginValidationHandler>()
-    .AddHandler<LogHandler>();
+    .AddHandler<LogHandler>()
+    .AddHandler<SWRequestHandler>()
+    .AddHandler<SWRequestSaveHandler>();
 
 var app = builder.Build();
 
