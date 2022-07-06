@@ -1,0 +1,8 @@
+docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -d mysql:latest
+
+docker exec -it mysql mysql -u root -p
+create database mydb;
+
+set CLASSPATH=%CLASSPATH%;"C:/Program Files (x86)/MySQL/Connector.J 5.1/mysql-connector-java-5.1.44-bin.jar"
+
+docker run -d --name camunda-mysql-env -p 7070:8080 --link mysql:mysql -e DB_DRIVER=com.mysql.jdbc.Driver  -e DB_URL=jdbc:mysql://mysql:3306/mydb?autoReconnect=true -e DB_USERNAME=root -e DB_PASSWORD=password -e WAIT_FOR=mysql:3306 camunda/camunda-bpm-platform:latest
