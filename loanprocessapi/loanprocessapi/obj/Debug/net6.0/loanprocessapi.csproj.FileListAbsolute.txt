@@ -47,3 +47,6 @@ G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\M
 G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
 G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\MySqlConnector.dll
 G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\Humanizer.dll
+G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+G:\Local disk\boacamundajul2022\loanprocessapi\loanprocessapi\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
