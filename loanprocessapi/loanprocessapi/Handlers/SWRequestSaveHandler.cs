@@ -1,5 +1,6 @@
 ﻿using Camunda.Worker;
 using loanprocessapi.Models;
+using loanprocessapi.Repositories;
 
 namespace loanprocessapi.Handlers
 {
@@ -8,9 +9,12 @@ namespace loanprocessapi.Handlers
     {
         private readonly ILogger _logger;
 
-        public SWRequestSaveHandler(ILogger<SWRequestHandler> logger)
+        private ISoftwareRequestRepo SoftwareRequestRepo;
+
+        public SWRequestSaveHandler(ILogger<SWRequestHandler> logger,ISoftwareRequestRepo softwareRequestRepo)
         {
             _logger = logger;
+            SoftwareRequestRepo = softwareRequestRepo;
         }
         public async Task<IExecutionResult> HandleAsync(ExternalTask externalTask, CancellationToken cancellationToken)
         {
@@ -25,7 +29,39 @@ namespace loanprocessapi.Handlers
             _logger.LogInformation($"Software Details, {softwareId},{softwareName}" +
                 $",{softwareVersion},{softwareCost}");
 
-            return new CompleteResult();
+            var softwareRequest = new SoftwareRequest
+            {
+                SoftwareId = Convert.ToInt32(softwareId),
+                SoftwareName = softwareName,
+                SoftwareVersion = softwareVersion,
+                SoftwareCost = Convert.ToInt64(softwareCost)
+            };
+            CompleteResult result = null;
+            var response = await SoftwareRequestRepo.AddSoftwareRequest(softwareRequest);
+          
+            if (result==null)
+            {
+                _logger.LogInformation($"Software Request Status null ");
+                result = new CompleteResult
+                {
+                    Variables = new Dictionary<string, Variable>
+                    {
+                        ["dbstatus"] = new Variable(false, VariableType.Boolean)
+                    }
+                };
+            }
+            if (response!=null)
+            {
+                _logger.LogInformation($"Software Request Status {response.SoftwareName} ");
+                result = new CompleteResult
+                {
+                    Variables = new Dictionary<string, Variable>
+                    {
+                        ["dbstatus"] = new Variable(true, VariableType.Boolean)
+                    }
+                };
+            }
+            return result;
 
         }
     }

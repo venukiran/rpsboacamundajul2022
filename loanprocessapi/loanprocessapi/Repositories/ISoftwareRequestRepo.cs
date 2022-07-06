@@ -4,7 +4,7 @@ namespace loanprocessapi.Repositories
 {
     public interface ISoftwareRequestRepo
     {
-        Task<SoftwareRequest> AddSoftwareReuest(SoftwareRequest SoftwareRequest);
+        Task<SoftwareRequest> AddSoftwareRequest(SoftwareRequest SoftwareRequest);
         Task<bool> RemoveSoftwareReuest(long SoftwareRequestId);
 
         Task<SoftwareRequest> GetSoftwareRequestById(long SoftwareRequestId);

@@ -14,7 +14,7 @@ namespace loanprocessapi.Repositories
         }
 
         
-        public async Task<SoftwareRequest> AddSoftwareReuest(SoftwareRequest SoftwareRequest)
+        public async Task<SoftwareRequest> AddSoftwareRequest(SoftwareRequest SoftwareRequest)
         {
             var result = await this._dbContext.swrequests.AddAsync(SoftwareRequest);
 
