@@ -2,12 +2,20 @@
 using Camunda.Worker;
 using Camunda.Worker.Client;
 using loanprocessapi.BPMNDeployment;
+using loanprocessapi.Contexts;
 using loanprocessapi.Handlers;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
+// Add services to the container.
+
+var connectionString=configuration.GetConnectionString("SWRequestDBConnString");
+
+builder.Services.AddDbContext<SoftwareRequestContext>(options =>
+options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(options =>
              options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));

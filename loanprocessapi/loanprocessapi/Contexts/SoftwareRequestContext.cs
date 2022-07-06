@@ -1,6 +1,8 @@
-﻿namespace loanprocessapi.Contexts
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace loanprocessapi.Contexts
 {
-    public class SoftwareRequestContext
+    public class SoftwareRequestContext:DbContext
     {
     }
 }
